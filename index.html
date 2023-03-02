@@ -12,7 +12,11 @@
       integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
       crossorigin="anonymous"
     />
-    <script src="https://kit.fontawesome.com/cd4b617a23.js" crossorigin="anonymous"></script>
+    <script
+      src="https://kit.fontawesome.com/cd4b617a23.js"
+      crossorigin="anonymous"
+    ></script>
+    
   </head>
   <body class="" onload="fetchAiTools()">
     <!-- header start -->
@@ -23,10 +27,56 @@
 
     <!-- main start -->
     <main class="container">
-      <section id="card-container" class="row gap-5 d-flex justify-content-center"></section>
+      <!-- all card section start -->
+      <section
+        id="card-container"
+        class="row gap-5 d-flex justify-content-center"
+      ></section>
+      <!-- all card section end -->
+
+      <!-- single card modal start -->
+      <section id="modal-container" class="container">
+
+<!-- Modal -->
+<div class="modal fade modal-xl" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-sm-6 mb-3 mb-sm-0">
+            <div class="card bg-danger-subtle">
+              <div class="card-body">
+                <h5 class="card-title"><span id="modal-1-title"></span></h5>
+                <div id="plan" class="d-flex justify-content-between text-center">
+                </div>
+                <div id="card-feature" class="d-flex justify-content-between">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="card">
+              
+              <div id="modal2" class="card-body">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
+      </section>
+      <!-- single card modal end -->
     </main>
     <!-- main end -->
-
+    
+ 
     <!-- js links -->
     <script src="index.js"></script>
     <script
