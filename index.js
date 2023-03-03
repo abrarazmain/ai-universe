@@ -4,17 +4,57 @@ const fetchAiTools = () => {
   fetch(URL)
     .then((res) => res.json())
     .then((data) => {
-      displayAiTools(data.data)
+      displayAiTools(data.data);
     })
     .catch((error) => console.error(error));
 };
 
 // function for display API data on DOM
 const displayAiTools = (data) => {
-  toggleSpinner(true)
   console.log(data);
   const container = document.getElementById("card-container");
-  data.tools.slice(0,6).forEach((singleDta) => {
+  // ===============================================
+  document
+    .getElementById("btn-show-all")
+    .addEventListener("click", function () {
+      // Clear the container element
+      container.innerHTML = "";
+
+      data.tools.forEach((singleDta) => {
+        // console.log(singleDta);
+        container.innerHTML += `
+          <di v class="card col-3" style="height: 500px;">
+    <img src="${singleDta.image}" class="card-img-top my-3" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">Features</h5>
+      <ol>
+      ${singleDta.features[0] ? `<li>${singleDta.features[0]}</li>` : ""}
+      ${singleDta.features[1] ? `<li>${singleDta.features[1]}</li>` : ""}
+      ${singleDta.features[2] ? `<li>${singleDta.features[2]}</li>` : ""}
+      </ol>
+      <hr>
+      <div class="d-flex justify-content-between">
+      <div>
+      <h5 class="card-title">${singleDta.name}</h5>
+      <p class="card-text"><small class="text-muted"><i class="fa-solid fa-calendar-days"></i> ${
+        singleDta.published_in
+      }</small></p>
+      </div>
+      <div>
+      <p data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="fetchSingleCard('${
+        singleDta.id
+      }')" class="btn btn-outline-secondary  bg-light-subtle
+      "><i class="fa-solid fa-arrow-right"></i></p>
+      </div>
+      </div>
+    </div>
+  </div>`;
+      });
+
+      toggleSpinner(false);
+    });
+  // ===============================================
+  data.tools.slice(0, 6).forEach((singleDta) => {
     // console.log(singleDta);
     container.innerHTML += `
         <di v class="card col-3" style="height: 500px;">
@@ -38,17 +78,17 @@ const displayAiTools = (data) => {
     <p data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="fetchSingleCard('${
       singleDta.id
     }')" class="btn btn-outline-secondary  bg-light-subtle
-    "><i class="fa-solid fa-circle-arrow-right"></i></p>
+    "><i class="fa-solid fa-arrow-right"></i></p>
     </div>
     </div>
   </div>
 </div>`;
   });
-  toggleSpinner(false)
+  toggleSpinner(false);
 };
 
 const fetchSingleCard = (id) => {
-  console.log(id);
+  // console.log(id);
   const URL = `https://openapi.programming-hero.com/api/ai/tool/${id}`;
   //   console.log(URL);
   fetch(URL)
@@ -57,7 +97,7 @@ const fetchSingleCard = (id) => {
 };
 
 const displaySingleCard = (data) => {
-  console.log(data);
+  // console.log(data);
   const container = document.getElementById("modal-container");
   document.getElementById("modal-1-title").innerText = data.description;
   document.getElementById("plan").innerHTML = `
@@ -91,5 +131,28 @@ const displaySingleCard = (data) => {
     `;
 };
 
+// loader function
+const toggleSpinner = (isLoading) => {
+  const spinner = document.getElementById("spinner");
+  if (isLoading) {
+    spinner.classList.remove("d-none");
+  } else {
+    spinner.classList.add("d-none");
+  }
+};
 
+// function for getting data from APi
+const fetchAiToolsForseeMore = () => {
+  const URL = `https://openapi.programming-hero.com/api/ai/tools`;
+  fetch(URL)
+    .then((res) => res.json())
+    .then((data) => {
+      displayApiForSeeMore(data);
+    })
+    .catch((error) => console.error(error));
+};
 
+const displayApiForSeeMore = (data) => {
+  console.log(data);
+};
+// fetchAiTools()
