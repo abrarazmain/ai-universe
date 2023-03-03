@@ -3,18 +3,21 @@ const fetchAiTools = () => {
   const URL = `https://openapi.programming-hero.com/api/ai/tools`;
   fetch(URL)
     .then((res) => res.json())
-    .then((data) => displayAiTools(data.data))
+    .then((data) => {
+      displayAiTools(data.data)
+    })
     .catch((error) => console.error(error));
 };
 
 // function for display API data on DOM
 const displayAiTools = (data) => {
+  toggleSpinner(true)
   console.log(data);
   const container = document.getElementById("card-container");
-  data.tools.forEach((singleDta) => {
+  data.tools.slice(0,6).forEach((singleDta) => {
     // console.log(singleDta);
     container.innerHTML += `
-        <di v class="card col-3" style="">
+        <di v class="card col-3" style="height: 500px;">
   <img src="${singleDta.image}" class="card-img-top my-3" alt="...">
   <div class="card-body">
     <h5 class="card-title">Features</h5>
@@ -41,6 +44,7 @@ const displayAiTools = (data) => {
   </div>
 </div>`;
   });
+  toggleSpinner(false)
 };
 
 const fetchSingleCard = (id) => {
@@ -73,15 +77,19 @@ const displaySingleCard = (data) => {
    <div>
    <h5 class="card-title">Integrations</h5>
    <ul>
-    <li>${data.integrations[0]}</li>
-    ${data.integrations[1] ? `<li>${data.integrations[1]}</li>` : ""}
-    ${data.integrations[2] ? `<li>${data.integrations[2]}</li>` : ""}
-    </ul>
+   <li>${data.integrations[0]}</li>
+   ${data.integrations[1] ? `<li>${data.integrations[1]}</li>` : ""}
+   ${data.integrations[2] ? `<li>${data.integrations[2]}</li>` : ""}
+   </ul> 
    </div>
     `;
-    document.getElementById('modal2').innerHTML = `
+  // modal card 2
+  document.getElementById("modal2").innerHTML = `
     <img src="${data.image_link[0]}" class="card-img-top" alt="...">
-    <h5 class="card-title">Integrations</h5>
-    `
-    
+    <h5 class="card-title d-flex justify-content-center">${data.input_output_examples[0].input}</h5>
+    <p class="d-flex justify-content-center mx-auto">${data.input_output_examples[0].output}</p>
+    `;
 };
+
+
+

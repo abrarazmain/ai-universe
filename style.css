@@ -1,0 +1,22 @@
+/* .card {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  @media screen and (max-width: 767px) {
+    .card {
+      display: block;
+    }
+  }  */
+
+#modal-close-btn {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  bottom: 570px;
+  left: 1120px;
+  background-color: #EB5757;
+  transform: rotate(45deg);
+  border-radius: 50%;
+  color: white;
+}
+
