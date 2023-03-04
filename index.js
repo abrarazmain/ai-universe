@@ -19,38 +19,35 @@ const displayAiTools = (data) => {
   console.log(data.tools);
   const container = document.getElementById("card-container");
   const showAll = document.getElementById("btn-show-all");
-  // ===============================================
-  // ----------------------------------------
+  
 
-  // ----------------------------------------
+  // show all
   showAll.addEventListener("click", function () {
     // Clear the container element
     container.innerHTML = "";
     showAll.classList.add("d-none");
-    data.tools.forEach((singleDta) => {
-      // console.log(singleDta);
-
+    data.tools.forEach((singleData) => {
       container.innerHTML += `
           <div class="card col-xs-12 col-sm-12 col-md-3" style="height: 500px;">
-    <img src="${singleDta.image}" class="card-img-top my-3" alt="...">
+    <img src="${singleData.image}" class="card-img-top my-3" alt="...">
     <div class="card-body">
       <h5 class="card-title">Features</h5>
       <ol>
-      ${singleDta.features[0] ? `<li>${singleDta.features[0]}</li>` : ""}
-      ${singleDta.features[1] ? `<li>${singleDta.features[1]}</li>` : ""}
-      ${singleDta.features[2] ? `<li>${singleDta.features[2]}</li>` : ""}
+      ${singleData.features[0] ? `<li>${singleData.features[0]}</li>` : ""}
+      ${singleData.features[1] ? `<li>${singleData.features[1]}</li>` : ""}
+      ${singleData.features[2] ? `<li>${singleData.features[2]}</li>` : ""}
       </ol>
       <hr>
       <div class="d-flex justify-content-between">
       <div>
-      <h5 class="card-title">${singleDta.name}</h5>
+      <h5 class="card-title">${singleData.name}</h5>
       <p class="card-text"><small class="text-muted"><i class="fa-solid fa-calendar-days"></i> ${
-        singleDta.published_in
+        singleData.published_in
       }</small></p>
       </div>
       <div>
       <p data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="fetchSingleCard('${
-        singleDta.id
+        singleData.id
       }')" class="btn btn-outline-secondary  bg-light-subtle
       "><i class="fa-solid fa-arrow-right"></i></p>
       </div>
@@ -60,30 +57,30 @@ const displayAiTools = (data) => {
     });
     toggleSpinner(false);
   });
-  // ===============================================
-  data.tools.slice(0, 6).forEach((singleDta) => {
-    // console.log(singleDta);
+  
+// show only 6
+  data.tools.slice(0, 6).forEach((singleData) => {
     container.innerHTML += `
         <di v class="card col-xs-12 col-sm-12 col-md-3" style="height: 500px;">
-  <img src="${singleDta.image}" class="card-img-top my-3" alt="...">
+  <img src="${singleData.image}" class="card-img-top my-3" alt="...">
   <div class="card-body">
     <h5 class="card-title">Features</h5>
     <ol>
-    ${singleDta.features[0] ? `<li>${singleDta.features[0]}</li>` : ""}
-    ${singleDta.features[1] ? `<li>${singleDta.features[1]}</li>` : ""}
-    ${singleDta.features[2] ? `<li>${singleDta.features[2]}</li>` : ""}
+    ${singleData.features[0] ? `<li>${singleData.features[0]}</li>` : ""}
+    ${singleData.features[1] ? `<li>${singleData.features[1]}</li>` : ""}
+    ${singleData.features[2] ? `<li>${singleData.features[2]}</li>` : ""}
     </ol>
     <hr>
     <div class="d-flex justify-content-between">
     <div>
-    <h5 class="card-title">${singleDta.name}</h5>
+    <h5 class="card-title">${singleData.name}</h5>
     <p class="card-text"><small class="text-muted"><i class="fa-solid fa-calendar-days"></i> ${
-      singleDta.published_in
+      singleData.published_in
     }</small></p>
     </div>
     <div>
     <p data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="fetchSingleCard('${
-      singleDta.id
+      singleData.id
     }')" class="btn btn-outline-secondary  bg-light-subtle
     "><i class="fa-solid fa-arrow-right"></i></p>
     </div>
@@ -93,6 +90,8 @@ const displayAiTools = (data) => {
   });
   toggleSpinner(false);
 };
+
+
 
 // function for fetch single card
 const fetchSingleCard = async (id) => {
@@ -107,6 +106,8 @@ const fetchSingleCard = async (id) => {
   }
 };
 
+
+
 // function for display single card on modal
 const displaySingleCard = (data) => {
   console.log(data);
@@ -115,13 +116,13 @@ const displaySingleCard = (data) => {
    <div class="text-success fw-bold bg-light p-3 rounded">${
      data.pricing[0].price ? data.pricing[0].price : "no data found"
    } 
-   <br> ${data.pricing[0].plan}</div>
+   <br> ${data.pricing[0].plan ?data.pricing[0].plan : 'no data found'}</div>
     <div class="text-danger-emphasis fw-bold bg-light p-3 rounded">${
       data.pricing[1].price ? data.pricing[1].price : "no data found"
-    } <br> ${data.pricing[1].plan}</div>
+    } <br> ${data.pricing[1].plan ? data.pricing[1].plan : 'no data found'}</div>
     <div class="text-warning-emphasis fw-bold bg-light p-3 rounded">${
       data.pricing[2].price ? data.pricing[2].price : "no data found"
-    } <br> ${data.pricing[2].plan}</div>
+    } <br> ${data.pricing[2].plan ? data.pricing[2].plan : 'no data found'}</div>
     `;
   document.getElementById("card-feature").innerHTML = `
     <div>
@@ -135,19 +136,19 @@ const displaySingleCard = (data) => {
    <div>
    <h5 class="card-title">Integrations</h5>
    <ul>
-   ${data.integrations ? `<li>${data.integrations[0]}</li>` : ""}
-   ${data.integrations ? `<li>${data.integrations[1]}</li>` : ""}
-   ${data.integrations ? `<li>${data.integrations[2]}</li>` : ""}
+   ${data.integrations[0] ? `<li>${data.integrations[0]}</li>` : ""}
+   ${data.integrations[1] ? `<li>${data.integrations[1]}</li>` : ""}
+   ${data.integrations[2] ? `<li>${data.integrations[2]}</li>` : ""}
    </ul> 
    </div>
     `;
   // modal card 2
   document.getElementById("modal2").innerHTML = `
-    <div class="test">
+    <div class="modal-img-div">
     <img src="${data.image_link[0]}" class="card-img-top" alt="...">
     <button id="special-btn type="button" class="${
       data.accuracy.score == null ? "d-none" : "d-block"
-    } fw-bold test2 btn btn-primary"
+    } fw-bold modal-img-div btn btn-primary"
         style="--bs-btn-padding-y: .35rem; --bs-btn-padding-x: .30rem; --bs-btn-font-size: .80rem;">
   ${Math.round(data.accuracy.score * 100)}% Accuracy
 </button>
@@ -170,80 +171,4 @@ const toggleSpinner = (isLoading) => {
     spinner.classList.add("d-none");
   }
 };
-
-// =================================
-const fetchApiDate = () => {
-  const apiUrl = "https://openapi.programming-hero.com/api/ai/tools";
-
-  fetch(apiUrl)
-    .then((res) => res.json())
-    .then((data) => displayCardsByDate(data.data));
-};
-// ====================================
-const displayCardsByDate = (data) => {
-  const container = document.getElementById("card-container");
-
-  // Sort the data by date in descending order
-  const sortedData = data.sort(
-    (a, b) => new Date(b.published_in) - new Date(a.published_in)
-  );
-
-  // Display the cards in the container
-  sortedData.forEach((singleData) => {
-    container.innerHTML += `
-      <div class="card col-3" style="height: 500px;">
-        <img src="${singleData.image}" class="card-img-top my-3" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Features</h5>
-          <ol>
-            ${singleData ? `<li>${singleData.features[0]}</li>` : ""}
-            ${singleData ? `<li>${singleData.features[1]}</li>` : ""}
-            ${singleData ? `<li>${singleData.features[2]}</li>` : ""}
-          </ol>
-          <hr>
-          <div class="d-flex justify-content-between">
-            <div>
-              <h5 class="card-title">${singleData.name}</h5>
-              <p class="card-text"><small class="text-muted"><i class="fa-solid fa-calendar-days"></i> ${
-                singleData.published_in
-              }</small></p>
-            </div>
-            <div>
-              <p data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="fetchSingleCard('${
-                singleData.id
-              }')" class="btn btn-outline-secondary bg-light-subtle"><i class="fa-solid fa-arrow-right"></i></p>
-            </div>
-          </div>
-        </div>
-      </div>`;
-  });
-};
-
-
-const FetchForDate = async () => {
-  const URL = `https://openapi.programming-hero.com/api/ai/tools`;
-  try {
-    fetch(URL);
-    const res = await fetch(URL);
-    const data = await res.json();
-    // console.log(data);
-    sortByDate(data.data)
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-
-function sortByDate(data) {
-  data.tools.forEach(singleData => {
-    console.log(singleData);
-    singleData.sort((a, b) => {
-      const dateA = new Date(a.date);
-      const dateB = new Date(b.date);
-      return dateA - dateB;
-    });
-    return cards;
-  });
- 
-}
 
