@@ -16,8 +16,7 @@
       src="https://kit.fontawesome.com/cd4b617a23.js"
       crossorigin="anonymous"
     ></script>
-    <link rel="stylesheet" href="style.css">
-    
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body class="" onload="fetchAiTools()">
     <!-- header start -->
@@ -32,68 +31,79 @@
       <section
         id="card-container"
         class="row gap-5 d-flex justify-content-center"
-      >  </section>
+      ></section>
       <!-- all card section end -->
 
-       <!-- loader -->
-       <section>
-        <div
-          id="spinner"
-          class="d-flex justify-content-center mt-5 pt-5 "
-        >
+      <!-- loader -->
+      <section>
+        <div id="spinner" class="d-flex justify-content-center mt-5 pt-5">
           <div class="spinner-border text-success" role="status">
             <span class="visually-hidden">Loading...</span>
           </div>
         </div>
       </section>
-    
-      <!-- single card modal start -->
-<section id="modal-container" class="container">
 
-  <!-- Modal -->
-  <div class="modal fade modal-xl" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button id="modal-close-btn" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div class="row">
-            <div class="col-12 col-md-6 mb-3 mb-md-0">
-              <div class="card bg-danger-subtle"style="height: 500px;">
-                <div class="card-body">
-                  <h5 class="card-title"><span id="modal-1-title"></span></h5>
-                  <div id="plan" class="d-flex justify-content-between text-center my-5">
+      <!-- single card modal start -->
+      <section id="modal-container" class="container">
+        <!-- Modal -->
+        <div
+          class="modal fade modal-xl"
+          id="exampleModal"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button
+                  id="modal-close-btn"
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-12 col-md-6 mb-3 mb-md-0">
+                    <div class="card bg-danger-subtle" style="height: 500px">
+                      <div class="card-body">
+                        <h5 class="card-title">
+                          <span id="modal-1-title"></span>
+                        </h5>
+                        <div
+                          id="plan"
+                          class="d-flex justify-content-between text-center my-5"
+                        ></div>
+                        <div
+                          id="card-feature"
+                          class="d-flex justify-content-between"
+                        ></div>
+                      </div>
+                    </div>
                   </div>
-                  <div id="card-feature" class="d-flex justify-content-between ">
+                  <div class="col-12 col-md-6">
+                    <div class="card" style="height: 500px">
+                      <div id="modal2" class="card-body"></div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="col-12 col-md-6 ">
-              <div class="card"style="height: 500px;">
-                <div id="modal2" class="card-body">
-                </div>
-              </div>
+              <div class="modal-footer"></div>
             </div>
           </div>
         </div>
-        <div class="modal-footer">
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- single card modal end -->
+      </section>
+      <!-- single card modal end -->
 
-<!-- show all btn -->
-<div class="d-flex justify-content-center my-5 ">
-  <div  id="btn-show-all" class="btn btn-primary">Show All</div>
-</div>
+      <!-- show all btn -->
+      <div class="d-flex justify-content-center my-5">
+        <div id="btn-show-all" class="btn btn-primary">Show All</div>
+      </div>
     </main>
     <!-- main end -->
-    
- 
+
     <!-- js links -->
     <script src="index.js"></script>
     <script

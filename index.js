@@ -6,22 +6,17 @@ const fetchAiTools = async () => {
     const res = await fetch(URL);
     const data = await res.json();
     displayAiTools(data.data);
-    date(data.data);
   } catch (error) {
     console.log(error);
   }
 };
 
-
-
 // function for display API data on DOM
 const displayAiTools = (data) => {
-  console.log(data.tools);
   const container = document.getElementById("card-container");
   const showAll = document.getElementById("btn-show-all");
   
-
-  // show all
+  console.log(data);
   showAll.addEventListener("click", function () {
     // Clear the container element
     container.innerHTML = "";
@@ -144,15 +139,15 @@ const displaySingleCard = (data) => {
     `;
   // modal card 2
   document.getElementById("modal2").innerHTML = `
-    <div class="modal-img-div">
-    <img src="${data.image_link[0]}" class="card-img-top" alt="...">
-    <button id="special-btn type="button" class="${
-      data.accuracy.score == null ? "d-none" : "d-block"
-    } fw-bold modal-img-div btn btn-primary"
-        style="--bs-btn-padding-y: .35rem; --bs-btn-padding-x: .30rem; --bs-btn-font-size: .80rem;">
-  ${Math.round(data.accuracy.score * 100)}% Accuracy
+  <div class="modal-img-div">
+  <img src="${data.image_link[0]}" class="card-img-top" alt="...">
+  <button id="special-btn type="button" class="${
+    data.accuracy.score == null ? "d-none" : "d-block"
+  } fw-bold modal-btn-div btn btn-primary"
+      style="--bs-btn-padding-y: .35rem; --bs-btn-padding-x: .30rem; --bs-btn-font-size: .80rem;">
+${Math.round(data.accuracy.score * 100)}% Accuracy
 </button>
-    </div>
+  </div>
     <h5 class="card-title d-flex justify-content-center">${
       data.input_output_examples[0].input
     }</h5>
