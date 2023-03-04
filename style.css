@@ -24,3 +24,15 @@
   color: white;
 }
 
+.test{
+  position: relative;
+}
+.test2{
+  position: absolute;
+  bottom: 250px;
+  left: 400px;
+}
+.btn-primary{
+  background-color: #EB5757;
+}
+
