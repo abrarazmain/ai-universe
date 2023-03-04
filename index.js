@@ -1,14 +1,15 @@
 // function for getting data from APi
-const fetchAiTools = () => {
+const fetchAiTools = async () => {
   const URL = `https://openapi.programming-hero.com/api/ai/tools`;
-  fetch(URL)
-    .then((res) => res.json())
-    .then((data) => {
-      displayAiTools(data.data);
-      
-
-    })
-    .catch((error) => console.error(error));
+  try{
+    fetch(URL)
+  const res = await fetch(URL)
+  const data = await res.json()
+  displayAiTools(data.data);
+}
+  catch (error) {
+    console.log(error);
+  }
 };
 
 
@@ -91,15 +92,17 @@ const displayAiTools = (data) => {
 };
 
 // function for fetch single card
-const fetchSingleCard = (id) => {
-  // console.log(id);
+const fetchSingleCard = async (id) => {
   const URL = `https://openapi.programming-hero.com/api/ai/tool/${id}`;
-  //   console.log(URL);
-  fetch(URL)
-    .then((res) => res.json())
-    .then((data) => {
-      displaySingleCard(data.data)
-    });
+  try{
+    fetch(URL)
+  const res = await fetch(URL)
+  const data = await res.json()
+  displaySingleCard(data.data);
+}
+  catch (error) {
+    console.log(error);
+  }
 };
 
 // function for display single card on modal
