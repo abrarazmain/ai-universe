@@ -5,9 +5,13 @@ const fetchAiTools = () => {
     .then((res) => res.json())
     .then((data) => {
       displayAiTools(data.data);
+      
+
     })
     .catch((error) => console.error(error));
 };
+
+
 
 // function for display API data on DOM
 const displayAiTools = (data) => {
@@ -23,7 +27,7 @@ const displayAiTools = (data) => {
     data.tools.forEach((singleDta) => {
       // console.log(singleDta);
       container.innerHTML += `
-          <di v class="card col-3" style="height: 500px;">
+          <div class="card col-xs-12 col-sm-12 col-md-3" style="height: 500px;">
     <img src="${singleDta.image}" class="card-img-top my-3" alt="...">
     <div class="card-body">
       <h5 class="card-title">Features</h5>
@@ -56,7 +60,7 @@ const displayAiTools = (data) => {
   data.tools.slice(0, 6).forEach((singleDta) => {
     // console.log(singleDta);
     container.innerHTML += `
-        <di v class="card col-3" style="height: 500px;">
+        <di v class="card col-xs-12 col-sm-12 col-md-3" style="height: 500px;">
   <img src="${singleDta.image}" class="card-img-top my-3" alt="...">
   <div class="card-body">
     <h5 class="card-title">Features</h5>
@@ -93,7 +97,9 @@ const fetchSingleCard = (id) => {
   //   console.log(URL);
   fetch(URL)
     .then((res) => res.json())
-    .then((data) => displaySingleCard(data.data));
+    .then((data) => {
+      displaySingleCard(data.data)
+    });
 };
 
 // function for display single card on modal
@@ -136,7 +142,7 @@ const displaySingleCard = (data) => {
     <img src="${data.image_link[0]}" class="card-img-top" alt="...">
     <button id="special-btn type="button" class="${data.accuracy.score == null ? 'd-none' : 'd-block'} fw-bold test2 btn btn-primary"
         style="--bs-btn-padding-y: .35rem; --bs-btn-padding-x: .30rem; --bs-btn-font-size: .80rem;">
-  ${data.accuracy.score}% Accuracy
+  ${Math.round(data.accuracy.score * 100)}% Accuracy
 </button>
     </div>
     <h5 class="card-title d-flex justify-content-center">${data.input_output_examples[0].input}</h5>
@@ -179,32 +185,26 @@ const displayCardsByDate = (data) => {
         <div class="card-body">
           <h5 class="card-title">Features</h5>
           <ol>
-            ${
-              singleData ? `<li>${singleData.features[0]}</li>` : ""
-            }
-            ${
-              singleData ? `<li>${singleData.features[1]}</li>` : ""
-            }
-            ${
-              singleData ? `<li>${singleData.features[2]}</li>` : ""
-            }
+            ${singleData ? `<li>${singleData.features[0]}</li>` : ""
+      }
+            ${singleData ? `<li>${singleData.features[1]}</li>` : ""
+      }
+            ${singleData ? `<li>${singleData.features[2]}</li>` : ""
+      }
           </ol>
           <hr>
           <div class="d-flex justify-content-between">
             <div>
               <h5 class="card-title">${singleData.name}</h5>
-              <p class="card-text"><small class="text-muted"><i class="fa-solid fa-calendar-days"></i> ${
-                singleData.published_in
-              }</small></p>
+              <p class="card-text"><small class="text-muted"><i class="fa-solid fa-calendar-days"></i> ${singleData.published_in
+      }</small></p>
             </div>
             <div>
-              <p data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="fetchSingleCard('${
-                singleData.id
-              }')" class="btn btn-outline-secondary bg-light-subtle"><i class="fa-solid fa-arrow-right"></i></p>
+              <p data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="fetchSingleCard('${singleData.id
+      }')" class="btn btn-outline-secondary bg-light-subtle"><i class="fa-solid fa-arrow-right"></i></p>
             </div>
           </div>
         </div>
       </div>`;
   });
-};
-
+}
