@@ -1,13 +1,13 @@
 // function for getting data from APi
 const fetchAiTools = async () => {
   const URL = `https://openapi.programming-hero.com/api/ai/tools`;
-  try{
-    fetch(URL)
-  const res = await fetch(URL)
-  const data = await res.json()
-  displayAiTools(data.data);
-}
-  catch (error) {
+  try {
+    fetch(URL);
+    const res = await fetch(URL);
+    const data = await res.json();
+    displayAiTools(data.data);
+    date(data.data);
+  } catch (error) {
     console.log(error);
   }
 };
@@ -20,13 +20,16 @@ const displayAiTools = (data) => {
   const container = document.getElementById("card-container");
   const showAll = document.getElementById("btn-show-all");
   // ===============================================
+  // ----------------------------------------
 
+  // ----------------------------------------
   showAll.addEventListener("click", function () {
     // Clear the container element
     container.innerHTML = "";
     showAll.classList.add("d-none");
     data.tools.forEach((singleDta) => {
       // console.log(singleDta);
+
       container.innerHTML += `
           <div class="card col-xs-12 col-sm-12 col-md-3" style="height: 500px;">
     <img src="${singleDta.image}" class="card-img-top my-3" alt="...">
@@ -94,13 +97,12 @@ const displayAiTools = (data) => {
 // function for fetch single card
 const fetchSingleCard = async (id) => {
   const URL = `https://openapi.programming-hero.com/api/ai/tool/${id}`;
-  try{
-    fetch(URL)
-  const res = await fetch(URL)
-  const data = await res.json()
-  displaySingleCard(data.data);
-}
-  catch (error) {
+  try {
+    fetch(URL);
+    const res = await fetch(URL);
+    const data = await res.json();
+    displaySingleCard(data.data);
+  } catch (error) {
     console.log(error);
   }
 };
@@ -143,13 +145,19 @@ const displaySingleCard = (data) => {
   document.getElementById("modal2").innerHTML = `
     <div class="test">
     <img src="${data.image_link[0]}" class="card-img-top" alt="...">
-    <button id="special-btn type="button" class="${data.accuracy.score == null ? 'd-none' : 'd-block'} fw-bold test2 btn btn-primary"
+    <button id="special-btn type="button" class="${
+      data.accuracy.score == null ? "d-none" : "d-block"
+    } fw-bold test2 btn btn-primary"
         style="--bs-btn-padding-y: .35rem; --bs-btn-padding-x: .30rem; --bs-btn-font-size: .80rem;">
   ${Math.round(data.accuracy.score * 100)}% Accuracy
 </button>
     </div>
-    <h5 class="card-title d-flex justify-content-center">${data.input_output_examples[0].input}</h5>
-    <p class="d-flex justify-content-center mx-auto">${data.input_output_examples[0].output}</p>
+    <h5 class="card-title d-flex justify-content-center">${
+      data.input_output_examples[0].input
+    }</h5>
+    <p class="d-flex justify-content-center mx-auto">${
+      data.input_output_examples[0].output
+    }</p>
     `;
 };
 
@@ -188,26 +196,54 @@ const displayCardsByDate = (data) => {
         <div class="card-body">
           <h5 class="card-title">Features</h5>
           <ol>
-            ${singleData ? `<li>${singleData.features[0]}</li>` : ""
-      }
-            ${singleData ? `<li>${singleData.features[1]}</li>` : ""
-      }
-            ${singleData ? `<li>${singleData.features[2]}</li>` : ""
-      }
+            ${singleData ? `<li>${singleData.features[0]}</li>` : ""}
+            ${singleData ? `<li>${singleData.features[1]}</li>` : ""}
+            ${singleData ? `<li>${singleData.features[2]}</li>` : ""}
           </ol>
           <hr>
           <div class="d-flex justify-content-between">
             <div>
               <h5 class="card-title">${singleData.name}</h5>
-              <p class="card-text"><small class="text-muted"><i class="fa-solid fa-calendar-days"></i> ${singleData.published_in
-      }</small></p>
+              <p class="card-text"><small class="text-muted"><i class="fa-solid fa-calendar-days"></i> ${
+                singleData.published_in
+              }</small></p>
             </div>
             <div>
-              <p data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="fetchSingleCard('${singleData.id
-      }')" class="btn btn-outline-secondary bg-light-subtle"><i class="fa-solid fa-arrow-right"></i></p>
+              <p data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="fetchSingleCard('${
+                singleData.id
+              }')" class="btn btn-outline-secondary bg-light-subtle"><i class="fa-solid fa-arrow-right"></i></p>
             </div>
           </div>
         </div>
       </div>`;
   });
+};
+
+
+const FetchForDate = async () => {
+  const URL = `https://openapi.programming-hero.com/api/ai/tools`;
+  try {
+    fetch(URL);
+    const res = await fetch(URL);
+    const data = await res.json();
+    // console.log(data);
+    sortByDate(data.data)
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
+function sortByDate(data) {
+  data.tools.forEach(singleData => {
+    console.log(singleData);
+    singleData.sort((a, b) => {
+      const dateA = new Date(a.date);
+      const dateB = new Date(b.date);
+      return dateA - dateB;
+    });
+    return cards;
+  });
+ 
 }
+
